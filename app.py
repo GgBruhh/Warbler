@@ -72,6 +72,9 @@ def signup():
                 password=form.password.data,
                 email=form.email.data,
                 image_url=form.image_url.data or User.image_url.default.arg,
+                bio=form.bio.data,
+                location=form.location.data,
+                header_image_url=form.header_image_url.data or User.header_image_url.default.arg
             )
             db.session.commit()
 
@@ -111,7 +114,9 @@ def login():
 def logout():
     """Handle logout of user."""
 
-    # IMPLEMENT THIS
+    session.pop('curr_user')
+    flash('Goodbye!')
+    return redirect('/')
 
 
 ##############################################################################
@@ -210,6 +215,7 @@ def profile():
     """Update profile for current user."""
 
     # IMPLEMENT THIS
+
 
 
 @app.route('/users/delete', methods=["POST"])
